@@ -1,0 +1,406 @@
+{
+  "$schema": "https://raw.githubusercontent.com/revisit-studies/study/v3.0.0/src/parser/StudyConfigSchema.json",
+  "studyMetadata": {
+    "title": "LoE 2: Do criterion checks help reviewers catch weak evidence?",
+    "version": "draft-0.1",
+    "authors": [
+      "CDT Dane Padgett",
+      "CDT Aarav Gupta"
+    ],
+    "date": "2026-11-10",
+    "description": "Draft study. Reviewers check simulated target nominations with an AI summary or with criterion-by-criterion checks and quoted evidence. All data is fictional.",
+    "organizations": [
+      "Army Cyber Institute",
+      "United States Military Academy"
+    ]
+  },
+  "uiConfig": {
+    "contactEmail": "replace-with-team-contact@example.com",
+    "helpTextPath": "loe2-criterion-checks/assets/help.md",
+    "logoPath": "revisitAssets/revisitLogoSquare.svg",
+    "withProgressBar": true,
+    "withSidebar": true,
+    "autoDownloadStudy": false
+  },
+  "importedLibraries": [
+    "nasa-tlx"
+  ],
+  "baseComponents": {
+    "trial-summary": {
+      "type": "markdown",
+      "instruction": "Review the packet, then answer on the left.",
+      "instructionLocation": "aboveStimulus",
+      "response": [
+        {
+          "id": "decision",
+          "type": "radio",
+          "location": "sidebar",
+          "required": true,
+          "prompt": "What should happen to this nomination?",
+          "options": [
+            {
+              "label": "Ready for the commander's decision",
+              "value": "ready"
+            },
+            {
+              "label": "Return to the staff that owns the problem",
+              "value": "return"
+            },
+            {
+              "label": "Escalate, I am not sure",
+              "value": "escalate"
+            }
+          ]
+        },
+        {
+          "id": "failingCheck",
+          "type": "dropdown",
+          "location": "sidebar",
+          "required": true,
+          "prompt": "Which check fails, if any?",
+          "options": [
+            {
+              "label": "None, it all holds",
+              "value": "none"
+            },
+            {
+              "label": "Commander's intent and objectives",
+              "value": "INTENT-01"
+            },
+            {
+              "label": "Intelligence: current and sufficient",
+              "value": "INTEL-01"
+            },
+            {
+              "label": "No-strike or restricted lists",
+              "value": "LEGAL-02"
+            },
+            {
+              "label": "Identification of the target",
+              "value": "LEGAL-03"
+            },
+            {
+              "label": "Protected sites nearby",
+              "value": "LEGAL-04"
+            },
+            {
+              "label": "Prior engagements",
+              "value": "INST-01"
+            }
+          ]
+        },
+        {
+          "id": "confidence",
+          "type": "likert",
+          "location": "sidebar",
+          "required": true,
+          "prompt": "How confident are you?",
+          "numItems": 5,
+          "start": 1,
+          "leftLabel": "Not at all",
+          "rightLabel": "Completely"
+        },
+        {
+          "id": "why",
+          "type": "shortText",
+          "location": "sidebar",
+          "required": false,
+          "prompt": "In one line, why?"
+        }
+      ]
+    },
+    "trial-criteria": {
+      "type": "website",
+      "instruction": "Review the packet, then answer on the left.",
+      "instructionLocation": "aboveStimulus",
+      "style": {
+        "height": "760px"
+      },
+      "response": [
+        {
+          "id": "decision",
+          "type": "radio",
+          "location": "sidebar",
+          "required": true,
+          "prompt": "What should happen to this nomination?",
+          "options": [
+            {
+              "label": "Ready for the commander's decision",
+              "value": "ready"
+            },
+            {
+              "label": "Return to the staff that owns the problem",
+              "value": "return"
+            },
+            {
+              "label": "Escalate, I am not sure",
+              "value": "escalate"
+            }
+          ]
+        },
+        {
+          "id": "failingCheck",
+          "type": "dropdown",
+          "location": "sidebar",
+          "required": true,
+          "prompt": "Which check fails, if any?",
+          "options": [
+            {
+              "label": "None, it all holds",
+              "value": "none"
+            },
+            {
+              "label": "Commander's intent and objectives",
+              "value": "INTENT-01"
+            },
+            {
+              "label": "Intelligence: current and sufficient",
+              "value": "INTEL-01"
+            },
+            {
+              "label": "No-strike or restricted lists",
+              "value": "LEGAL-02"
+            },
+            {
+              "label": "Identification of the target",
+              "value": "LEGAL-03"
+            },
+            {
+              "label": "Protected sites nearby",
+              "value": "LEGAL-04"
+            },
+            {
+              "label": "Prior engagements",
+              "value": "INST-01"
+            }
+          ]
+        },
+        {
+          "id": "confidence",
+          "type": "likert",
+          "location": "sidebar",
+          "required": true,
+          "prompt": "How confident are you?",
+          "numItems": 5,
+          "start": 1,
+          "leftLabel": "Not at all",
+          "rightLabel": "Completely"
+        },
+        {
+          "id": "why",
+          "type": "shortText",
+          "location": "sidebar",
+          "required": false,
+          "prompt": "In one line, why?"
+        }
+      ]
+    }
+  },
+  "components": {
+    "introduction": {
+      "type": "markdown",
+      "path": "loe2-criterion-checks/assets/introduction.md",
+      "response": []
+    },
+    "consent": {
+      "type": "questionnaire",
+      "response": [
+        {
+          "id": "consentText",
+          "type": "textOnly",
+          "prompt": "## Consent\n\nPLACEHOLDER. Replace with the IRB-approved consent text before any real participant sees this study."
+        },
+        {
+          "id": "consent",
+          "type": "radio",
+          "required": true,
+          "prompt": "Do you agree to take part?",
+          "options": [
+            {
+              "label": "I agree",
+              "value": "agree"
+            },
+            {
+              "label": "I do not agree",
+              "value": "decline"
+            }
+          ]
+        }
+      ]
+    },
+    "background": {
+      "type": "questionnaire",
+      "response": [
+        {
+          "id": "role",
+          "type": "radio",
+          "required": true,
+          "prompt": "Which best describes you?",
+          "options": [
+            {
+              "label": "Cadet",
+              "value": "cadet"
+            },
+            {
+              "label": "Officer",
+              "value": "officer"
+            },
+            {
+              "label": "Warrant officer or NCO",
+              "value": "wo-nco"
+            },
+            {
+              "label": "Civilian",
+              "value": "civilian"
+            }
+          ]
+        },
+        {
+          "id": "targetingExperience",
+          "type": "radio",
+          "required": true,
+          "prompt": "Targeting experience",
+          "options": [
+            {
+              "label": "None",
+              "value": "none"
+            },
+            {
+              "label": "Coursework or exercises",
+              "value": "training"
+            },
+            {
+              "label": "Served in a targeting or fires cell",
+              "value": "operational"
+            }
+          ]
+        },
+        {
+          "id": "aiUse",
+          "type": "likert",
+          "required": true,
+          "prompt": "How often do you use AI tools at work or school?",
+          "numItems": 5,
+          "start": 1,
+          "leftLabel": "Never",
+          "rightLabel": "Daily"
+        }
+      ]
+    },
+    "training": {
+      "type": "markdown",
+      "path": "loe2-criterion-checks/assets/training.md",
+      "response": []
+    },
+    "debrief": {
+      "type": "questionnaire",
+      "response": [
+        {
+          "id": "trust",
+          "type": "likert",
+          "required": true,
+          "prompt": "I trusted the AI's assessment.",
+          "numItems": 5,
+          "start": 1,
+          "leftLabel": "Strongly disagree",
+          "rightLabel": "Strongly agree"
+        },
+        {
+          "id": "useful",
+          "type": "likert",
+          "required": true,
+          "prompt": "The display showed me what I needed to decide.",
+          "numItems": 5,
+          "start": 1,
+          "leftLabel": "Strongly disagree",
+          "rightLabel": "Strongly agree"
+        },
+        {
+          "id": "comments",
+          "type": "longText",
+          "required": false,
+          "prompt": "Anything you would change?"
+        }
+      ]
+    },
+    "thanks": {
+      "type": "markdown",
+      "path": "loe2-criterion-checks/assets/thanks.md",
+      "response": []
+    },
+    "summary-N-01": {
+      "baseComponent": "trial-summary",
+      "path": "loe2-criterion-checks/assets/summary-N-01.md",
+      "description": "Summary group, packet N-01"
+    },
+    "criteria-N-01": {
+      "baseComponent": "trial-criteria",
+      "path": "loe2-criterion-checks/assets/tool/study-N-01.html",
+      "description": "Criteria group, packet N-01 in the tool"
+    },
+    "summary-N-02": {
+      "baseComponent": "trial-summary",
+      "path": "loe2-criterion-checks/assets/summary-N-02.md",
+      "description": "Summary group, packet N-02"
+    },
+    "criteria-N-02": {
+      "baseComponent": "trial-criteria",
+      "path": "loe2-criterion-checks/assets/tool/study-N-02.html",
+      "description": "Criteria group, packet N-02 in the tool"
+    },
+    "summary-N-03": {
+      "baseComponent": "trial-summary",
+      "path": "loe2-criterion-checks/assets/summary-N-03.md",
+      "description": "Summary group, packet N-03"
+    },
+    "criteria-N-03": {
+      "baseComponent": "trial-criteria",
+      "path": "loe2-criterion-checks/assets/tool/study-N-03.html",
+      "description": "Criteria group, packet N-03 in the tool"
+    },
+    "summary-N-04": {
+      "baseComponent": "trial-summary",
+      "path": "loe2-criterion-checks/assets/summary-N-04.md",
+      "description": "Summary group, packet N-04"
+    },
+    "criteria-N-04": {
+      "baseComponent": "trial-criteria",
+      "path": "loe2-criterion-checks/assets/tool/study-N-04.html",
+      "description": "Criteria group, packet N-04 in the tool"
+    }
+  },
+  "sequence": {
+    "order": "fixed",
+    "components": [
+      "introduction",
+      "consent",
+      "background",
+      "training",
+      {
+        "id": "summary",
+        "conditional": true,
+        "order": "latinSquare",
+        "components": [
+          "summary-N-01",
+          "summary-N-02",
+          "summary-N-03",
+          "summary-N-04"
+        ]
+      },
+      {
+        "id": "criteria",
+        "conditional": true,
+        "order": "latinSquare",
+        "components": [
+          "criteria-N-01",
+          "criteria-N-02",
+          "criteria-N-03",
+          "criteria-N-04"
+        ]
+      },
+      "$nasa-tlx.components.nasa-tlx",
+      "debrief",
+      "thanks"
+    ]
+  }
+}
